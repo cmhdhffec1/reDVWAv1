@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoKill</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #0d0d0d;
+            color: #d9d9d9;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            padding: 20px 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 50px;
+        }
+
+        nav a {
+            color: #d9d9d9;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -8px;
+            left: 0;
+            background: #ff0000;
+            transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        nav a:hover::before:not(body > header > nav > a) {
+            width: 100%;
+        }
+
+        nav a:hover:not(body > header > nav > a) {
+            color: #ff0000;
+        }
+
+        .section {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(10, 10, 10, 0.95));
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 60px;
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(255, 0, 0, 0.2);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(255, 0, 0, 0.2), transparent 50%);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .card h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #ff4d4d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+        }
+
+        .card p {
+            font-size: 20px;
+            color: #a0a0a0;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .cyber-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            border: 2px solid #ff0000;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            z-index: 1;
+            transition: color 0.4s ease, border 0.4s ease;
+        }
+
+        .cyber-btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: #ff0000;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: 1;
+        }
+
+        .cyber-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cyber-btn:hover {
+            color: #000;
+            border-color: transparent;
+        }
+
+        .cyber-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .cyber-btn:hover::after {
+            opacity: 1;
+        }
+
+        footer {
+            padding: 40px 0;
+            background: linear-gradient(180deg, transparent, #000);
+            text-align: center;
+            color: #a0a0a0;
+            font-size: 16px;
+        }
+        .logo {
+                width: 100px;
+            }
+
+        @media (max-width: 768px) {
+            .card h2 {
+                font-size: 36px;
+            }
+
+            .card p {
+                font-size: 16px;
+            }
+
+            .card {
+                padding: 40px;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bgCanvas"></canvas>
+
+    <header>
+        <nav class="container">
+            <a href="/index.html">
+                <img src="img/logo.png" class="logo" alt="EchoKill Logo">
+            </a>
+            <ul>
+                <li><a href="#security-test">Тестирование</a></li>
+                <li><a href="#telegram">Telegram</a></li>
+                <li><a href="#join-team">Команда</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="security-test" class="section">
+        <div class="container">
+            <div class="card">
+                <h2>Тестирование безопасности</h2>
+                <p>Погружение через один клик</p>
+                <a href="/sql.php" class="cyber-btn" onclick="startTest()"><span>Начать тестирование</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="telegram" class="section">
+        <div class="container">
+            <div class="card">
+                <h2>Telegram сообщество</h2>
+                <p>Чуть позже</p>
+                <a href="" class="cyber-btn" target="_blank"><span>Вступить в Telegram</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="join-team" class="section">
+        <div class="container">
+            <div class="card">
+                <h2>Присоединяйтесь</h2>
+                <p>Чуть позже</p>
+                <a href="#" class="cyber-btn" onclick="joinTeam()"><span>Подать заявку</span></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+     
+        class BinaryParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.text = Math.random() > 0.5 ? '1' : '0';
+                this.size = Math.random() * 16 + 12;
+                this.speedY = Math.random() * 3 + 2;
+                this.opacity = 1;
+                this.fadeRate = Math.random() * 0.02 + 0.01;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.opacity -= this.fadeRate;
+            }
+
+            draw() {
+                ctx.font = `${this.size}px monospace`;
+                ctx.fillStyle = `rgba(255, 0, 0, ${this.opacity})`;
+                ctx.fillText(this.text, this.x, this.y);
+            }
+        }
+
+        const binaryParticles = [];
+
+
+        document.addEventListener('mousemove', (e) => {
+            const particleCount = Math.random() * 3 + 2;
+            for (let i = 0; i < particleCount; i++) {
+                binaryParticles.push(new BinaryParticle(e.clientX, e.clientY));
+            }
+        });
+
+    
+        function emitParticlesFromCard(event, card) {
+            const rect = card.getBoundingClientRect();
+            const cardBottom = rect.bottom;
+            const cardLeft = rect.left;
+            const cardWidth = rect.width;
+            const particleCount = Math.random() * 5 + 5;
+            for (let i = 0; i < particleCount; i++) {
+                const x = cardLeft + Math.random() * cardWidth;
+                binaryParticles.push(new BinaryParticle(x, cardBottom));
+            }
+        }
+
+   
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => emitParticlesFromCard(e, card));
+        });
+
+   
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.speedY = (Math.random() - 0.5) * 0.8;
+                this.hue = Math.random() * 360;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.hue += 0.5;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = `hsl(${this.hue}, 70%, 50%)`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        class Connection {
+            constructor(node1, node2) {
+                this.node1 = node1;
+                this.node2 = node2;
+            }
+
+            draw() {
+                const dist = Math.hypot(this.node1.x - this.node2.x, this.node1.y - this.node2.y);
+                if (dist < 150) {
+                    ctx.strokeStyle = `rgba(255, 0, 0, ${1 - dist / 150})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(this.node1.x, this.node1.y);
+                    ctx.lineTo(this.node2.x, this.node2.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        const nodes = Array.from({ length: 100 }, () => new Node());
+        const connections = [];
+
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                connections.push(new Connection(nodes[i], nodes[j]));
+            }
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          
+            nodes.forEach(node => {
+                node.update();
+                node.draw();
+            });
+
+            connections.forEach(connection => connection.draw());
+
+      
+            binaryParticles.forEach((particle, index) => {
+                particle.update();
+                particle.draw();
+                if (particle.opacity <= 0) {
+                    binaryParticles.splice(index, 1);
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>

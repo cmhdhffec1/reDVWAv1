@@ -34,7 +34,7 @@
 
 4. **Запустите приложение**  
    ```bash
-   docker compose up -d
+   docker-compose up -d
    ```
 
 ## Проверка

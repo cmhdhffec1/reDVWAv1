@@ -10,7 +10,6 @@
   ```bash
   docker compose version
   ```
-- Установленный **Git**.
 
 ## Установка
 

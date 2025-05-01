@@ -47,3 +47,7 @@ docker ps
   ```bash
   docker compose down
   ```
+#Основная информация
+
+**http://localhost:8081/ - основная страница**
+**http://localhost:8080/ - phpmyadmin**

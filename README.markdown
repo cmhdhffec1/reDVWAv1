@@ -1,6 +1,5 @@
 # Руководство по установке
 
-
 ## Предварительные требования
 
 - Установленный **Docker**. Проверьте версию:
@@ -47,13 +46,16 @@ docker ps
   ```bash
   docker compose down
   ```
-#Основная информация
 
-**http://localhost:8081/ - основная страница**
-**http://localhost:8080/ - phpmyadmin**
+# Основная информация
 
-Подключение к бд:
+**http://localhost:8081/ - основная страница**  
+**http://localhost:8080/ - phpMyAdmin**
+
+Подключение к базе данных:
+```bash
 $host = 'db';
 $user = 'dvwa';
 $pass = 'dvwa';
 $dbname = 'dvwa';
+```

@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/c3a90a67-f45a-4856-beb0-4fc71a9bee97)
+
 # Руководство по установке
 
 ## Предварительные требования

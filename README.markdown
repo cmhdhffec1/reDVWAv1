@@ -51,3 +51,9 @@ docker ps
 
 **http://localhost:8081/ - основная страница**
 **http://localhost:8080/ - phpmyadmin**
+
+Подключение к бд:
+$host = 'db';
+$user = 'dvwa';
+$pass = 'dvwa';
+$dbname = 'dvwa';

@@ -235,6 +235,7 @@ div#notification {
     <li><a href="/xss.php">Lesson 1: XSS</a></li>
         <li><a href="/csrf.php">Lesson 2: CSRF</a></li>
         <li><a href="/sql.php">Lesson 3: SQL Injection</a></li>
+        <li><a href="/rce.php">Lesson 4: RCE File Upload</a></li>
     </ul>
 </div>
 
@@ -264,9 +265,10 @@ div#notification {
         dataType: "json",
         success: function(info){
             if (info == "login"){
-                window.location.replace("/xss.php");
+                $('#error-message').text("Login! Welcome!").css('display', 'block');
+
             } else if (info == "false") {
-                alert("Incorrect username or password");
+                $('#error-message').text("Invalid username or password").css('display', 'block');
             }
         },
         error: function(){

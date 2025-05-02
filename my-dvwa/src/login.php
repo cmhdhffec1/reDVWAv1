@@ -1,5 +1,5 @@
 <?php
-$host = 'db'; // Имя сервиса MySQL в docker-compose
+$host = 'db';
 $user = 'dvwa';
 $pass = 'dvwa';
 $dbname = 'dvwa';
@@ -12,7 +12,6 @@ if ($conn->connect_error) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    // Уязвимый SQL-запрос (для теста, не используй в продакшене!)
     $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
     $result = $conn->query($query);
     if ($result->num_rows > 0) {

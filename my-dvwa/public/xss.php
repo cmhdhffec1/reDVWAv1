@@ -251,6 +251,7 @@ div#notification {
         <li><a href="/xss.php">Lesson 1: XSS</a></li>
         <li><a href="/csrf.php">Lesson 2: CSRF</a></li>
         <li><a href="/sql.php">Lesson 3: SQL Injection</a></li>
+        <li><a href="/rce.php">Lesson 4: RCE File Upload</a></li>
     </ul>
 </div>
 

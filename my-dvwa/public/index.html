@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/mlogo.png" sizes="32x32" type="image/x-icon">
     <title>EchoKill</title>
     <style>
         * {
@@ -84,16 +85,18 @@
         }
 
         .section {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 0;
-            position: relative;
-            opacity: 0;
-            transform: translateY(100px);
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    min-height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 320px 0;
+    position: relative;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 1400px;
+    place-self: center;
+}
 
         .section.visible {
             opacity: 1;
@@ -249,7 +252,6 @@
             <ul>
                 <li><a href="#security-test">Тестирование</a></li>
                 <li><a href="#telegram">Telegram</a></li>
-                <li><a href="#join-team">Команда</a></li>
             </ul>
         </nav>
     </header>
@@ -259,33 +261,17 @@
             <div class="card">
                 <h2>Тестирование безопасности</h2>
                 <p>Погружение через один клик</p>
-                <a href="/sql.php" class="cyber-btn" onclick="startTest()"><span>Начать тестирование</span></a>
+                <a href="/xss.php" class="cyber-btn" onclick="startTest()"><span>Начать тестирование</span></a>
             </div>
         </div>
-    </section>
-
-    <section id="telegram" class="section">
         <div class="container">
             <div class="card">
                 <h2>Telegram сообщество</h2>
-                <p>Чуть позже</p>
-                <a href="" class="cyber-btn" target="_blank"><span>Вступить в Telegram</span></a>
+                <p>Сделано с душой</p>
+                <a href="https://t.me/EchoKill_Hack" class="cyber-btn" target="_blank"><span>Вступить в Telegram</span></a>
             </div>
         </div>
     </section>
-
-    <section id="join-team" class="section">
-        <div class="container">
-            <div class="card">
-                <h2>Присоединяйтесь</h2>
-                <p>Чуть позже</p>
-                <a href="#" class="cyber-btn" onclick="joinTeam()"><span>Подать заявку</span></a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-    </footer>
 
     <script>
         const canvas = document.getElementById('bgCanvas');

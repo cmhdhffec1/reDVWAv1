@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="icon" href="/img/mlogo.png" sizes="32x32" type="image/x-icon">
     <title>RCE File Upload Page</title>
     <style>
         * {
@@ -209,9 +210,8 @@
     <p style="color: #fff; font-size: 24px;">Level 1 (RCE File Upload) - easy</p>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="https://t.me/EchoKill_Hack">Contact</a></li>
             <li><a href="#" id="all-tasks">All Tasks</a></li>
         </ul>
     </nav>
@@ -227,6 +227,7 @@
         <li><a href="/csrf.php">Lesson 2: CSRF</a></li>
         <li><a href="/sql.php">Lesson 3: SQL Injection</a></li>
         <li><a href="/rce.php">Lesson 4: RCE File Upload</a></li>
+        <li><a href="/ci.php">Lesson 5: Command Injection</a></li>
     </ul>
 </div>
 

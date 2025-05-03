@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   web:
     build:
@@ -14,6 +15,11 @@ services:
       - db
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
+    cap_add:
+      - NET_ADMIN 
+      - NET_RAW    
+    restart: always  
+
   db:
     image: mysql:8.0
     container_name: my-dvwa-db
@@ -27,6 +33,8 @@ services:
       - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
+    restart: always
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: my-dvwa-phpmyadmin
@@ -38,5 +46,7 @@ services:
       PMA_PASSWORD: dvwa
     depends_on:
       - db
+    restart: always
+
 volumes:
   db_data:

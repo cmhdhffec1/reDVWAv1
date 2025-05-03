@@ -4,11 +4,11 @@
 
 ## Предварительные требования
 
-- Установленный **Docker**. Проверьте версию:
+- Установить **Docker**:
   ```bash
-  docker --version
+  sudo apt install docker.io
   ```
-- Установленный **Docker Compose**. Проверьте версию:
+- Проверьте версию:
   ```bash
   docker compose version
   ```
@@ -29,12 +29,12 @@
 3. **Соберите Docker-образ**  
    Создайте Docker-образ с именем `redvwav1`:
    ```bash
-   docker build -t redvwav1 .
+   sudo docker build -t redvwav1 .
    ```
 
 4. **Запустите приложение**  
    ```bash
-   docker-compose up -d
+   sudo docker-compose up -d
    ```
 
 ## Проверка

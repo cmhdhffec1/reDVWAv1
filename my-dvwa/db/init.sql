@@ -1,4 +1,3 @@
-sql
 CREATE DATABASE IF NOT EXISTS dvwa;
 USE dvwa;
 

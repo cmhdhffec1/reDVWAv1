@@ -45,7 +45,7 @@ docker ps
 ## Примечания
 - Для остановки приложения выполните:
   ```bash
-  docker compose down
+  sudo docker-compose down
   ```
 
 # Основная информация

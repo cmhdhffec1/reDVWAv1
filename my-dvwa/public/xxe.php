@@ -119,6 +119,33 @@
             background: #cc2929;
         }
 
+        .hint-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #555;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .hint-btn:hover {
+            background: #777;
+        }
+
+        .hint-text {
+            color: #ccc;
+            text-align: left;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+            background: #3a3a3a;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
         .error-message, #loader {
             color: #ff3333;
             text-align: center;
@@ -212,7 +239,7 @@
     <a href="/index.html">
         <img src="img/logo.png" class="logo" alt="EchoKill Logo">
     </a>
-    <p style="color: #fff; font-size: 24px;">Level 1 (XXE Vulnerability) - easy</p>
+    <p style="color: #fff; font-size: 24px;">Level 1 (XXE Vulnerability) - middle</p>
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
@@ -232,7 +259,8 @@
         <li><a href="/csrf.php">Lesson 2: CSRF</a></li>
         <li><a href="/sql.php">Lesson 3: SQL Injection</a></li>
         <li><a href="/rce.php">Lesson 4: RCE File Upload</a></li>
-        <li><a href="/xxe.php">Lesson 5: XXE Vulnerability</a></li>
+        <li><a href="/ci.php">Lesson 5: Command Injection</a></li>
+        <li><a href="/xxe.php">Lesson 6: XXE Vulnerability</a></li>
     </ul>
 </div>
 
@@ -241,9 +269,13 @@
         <h2>XML Data Processor</h2>
         <div class="input-group">
             <label for="xml-data">Enter XML Data</label>
-            <textarea id="xml-data" name="xml-data" placeholder="e.g., <?xml version='1.0'?><data>Hello</data>" required></textarea>
+            <textarea id="xml-data" name="xml-data" placeholder="e.g., < ?xml version='1.0'?><data>Hello</data>" required></textarea>
         </div>
         <button class="submit-btn">Submit XML</button>
+        <button class="hint-btn" id="hint-btn">Show Hint</button>
+        <div class="hint-text" id="hint-text">
+            <p>This page processes XML input and may be vulnerable to XML External Entity (XXE) attacks. Try crafting XML with a DOCTYPE declaration to include external entities. You might be able to read system files or a hidden test file created for this challenge. Look for files in common locations like the root directory or temporary folders.</p>
+        </div>
         <p class="error-message" id="error-message"></p>
         <p class="response" id="response"></p>
         <p id="loader"></p>
@@ -279,6 +311,11 @@ $(document).ready(function() {
         $(this).fadeOut(function() {
             $(this).remove();
         });
+    });
+
+    // Hint toggle
+    $("#hint-btn").click(function() {
+        $("#hint-text").slideToggle();
     });
 
     // Submit XML on button click

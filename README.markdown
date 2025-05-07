@@ -34,6 +34,7 @@
 
 4. **Запустите приложение**  
    ```bash
+   sudo apt-get install docker-compose
    sudo docker-compose up -d
    ```
 

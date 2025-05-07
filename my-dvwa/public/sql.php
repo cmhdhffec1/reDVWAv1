@@ -237,6 +237,7 @@ div#notification {
         <li><a href="/sql.php">Lesson 3: SQL Injection</a></li>
         <li><a href="/rce.php">Lesson 4: RCE File Upload</a></li>
         <li><a href="/ci.php">Lesson 5: Command Injection</a></li>
+        <li><a href="/xxe.php">Lesson 6: XXE Vulnerability</a></li>
     </ul>
 </div>
 

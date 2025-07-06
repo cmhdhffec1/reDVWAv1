@@ -62,4 +62,4 @@ $pass = 'dvwa';
 $dbname = 'dvwa';
 ```
 
-https://t.me/EchoKill_Hack
+
